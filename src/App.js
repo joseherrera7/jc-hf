@@ -27,17 +27,17 @@ class App extends React.Component {
           <br />
           <Container>
             <Row className="justify-content-md-center">
-              <Col><Cards header="My abilities..." title="Programming Languages" text={abilities.map(item => <li>{item}</li>)}/></Col>
-              <Col><Cards header="My values..." title="Aptitudes" text={aptitudes.map(item => <li>{item}</li>)}/></Col>
+              <Col sm="auto"><Cards header="My abilities..." title="Programming Languages" text={abilities.map(item => <li key={item}>{item}</li>)}/></Col>
+              <Col sm="auto"><Cards header="My values..." title="Aptitudes" text={aptitudes.map(item => <li key={item}>{item}</li>)}/></Col>
             </Row>
             <br/>
           </Container>
           <div className="bg-dark">
             <br/>
-            <MailForm/>
+              <p className="phrase">"Incluso la gente que afirma que no podemos hacer nada para cambiar nuestro destino, mira antes de cruzar la calle."</p>
+              <p className="phrase">-Stephen Hawking</p>
             <br/>
           </div>
-          <footer><p>hola hola</p></footer>
         </body>
       </div>
     );

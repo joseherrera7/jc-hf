@@ -1,82 +1,72 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import axios from 'axios';
 
-// A custom validation function. This must return an object
-// which keys are symmetrical to our values/initialValues
-const validate = values => {
-    const errors = {};
-    if (!values.firstName) {
-        errors.firstName = 'Required';
-    } else if (values.firstName.length > 15) {
-        errors.firstName = 'Must be 15 characters or less';
-    }
+class MailForm extends React.Component {
 
-    if (!values.lastName) {
-        errors.lastName = 'Required';
-    } else if (values.lastName.length > 20) {
-        errors.lastName = 'Must be 20 characters or less';
-    }
-
-    if (!values.email) {
-        errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
-    }
-
-    return errors;
-};
-
-const MailForm = () => {
-    // Pass the useFormik() hook initial form values and a submit function that will
-    // be called when the form is submitted
-    const formik = useFormik({
-        initialValues: {
-            firstName: '',
-            lastName: '',
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
             email: '',
-        },
-        validate,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    });
-    return (
-        <div class="form-style-6">
-            <h1>Send me an Email</h1>
-            <form onSubmit={formik.handleSubmit}>
-                <label htmlFor="firstName">First Name</label>
-                <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.firstName}
-                />
-                {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
-                <label htmlFor="lastName">Last Name</label>
-                <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.lastName}
-                />
-                {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
-                <label htmlFor="email">Email Address</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                />
-                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    );
+            message: ''
+        }
+    }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        axios({
+            method: "POST",
+            url: "http://localhost:3002/send",
+            data: this.state
+        }).then((response) => {
+            if (response.data.status === 'success') {
+                alert("Message Sent.");
+                this.resetForm()
+            } else if (response.data.status === 'fail') {
+                alert("Message failed to send.")
+            }
+        })
+    }
 
-};
+    resetForm() {
+
+        this.setState({ name: "", email: "", message: "" })
+    }
+
+    render() {
+        return (
+            <div className="form-style-6">
+                <h1>Contact me!</h1>
+                <form id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
+                    <div className="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input type="text" className="form-control" id="name" value={this.state.name} onChange={this.onNameChange.bind(this)} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="exampleInputEmail1">Email address</label>
+                        <input type="email" className="form-control" id="email" aria-describedby="emailHelp" value={this.state.email} onChange={this.onEmailChange.bind(this)} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="message">Message</label>
+                        <textarea className="form-control" rows="5" id="message" value={this.state.message} onChange={this.onMessageChange.bind(this)} />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        );
+    }
+
+    onNameChange(event) {
+        this.setState({ name: event.target.value })
+    }
+
+    onEmailChange(event) {
+        this.setState({ email: event.target.value })
+    }
+
+    onMessageChange(event) {
+        this.setState({ message: event.target.value })
+    }
+}
 
 export default MailForm;

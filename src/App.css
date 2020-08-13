@@ -25,6 +25,20 @@
   color: white;
 }
 
+.Form-buttom {
+  box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	padding: 3%;
+	background: #43D1AF;
+	border-bottom: 2px solid #30C29E;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;	
+	color: #fff;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -36,6 +50,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.phrase{
+  color: white;
+  text-align: center;
+  font-style: italic;
 }
 
 .form-style-6{
