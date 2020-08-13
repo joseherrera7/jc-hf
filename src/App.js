@@ -34,8 +34,8 @@ class App extends React.Component {
           </Container>
           <div className="bg-dark">
             <br/>
-              <p className="phrase">"Incluso la gente que afirma que no podemos hacer nada para cambiar nuestro destino, mira antes de cruzar la calle."</p>
-              <p className="phrase">-Stephen Hawking</p>
+              <p className="phrase">"One, remember to look up at the stars and not down at your feet. Two, never give up work. Work gives you meaning and purpose <br/> and life is empty without it. Three, if you are lucky enough to find love, remember it is there and don't throw it away."</p>
+              <p className="phrase">- Stephen Hawking</p>
             <br/>
           </div>
         </body>
