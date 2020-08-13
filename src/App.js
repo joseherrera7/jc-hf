@@ -5,9 +5,13 @@ import Cards from './Cards'
 import { Container } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
 import { Col } from 'react-bootstrap';
+import MailForm from './MailForm';
+
+const abilities = ['C#', 'JavaScript', 'Java', 'React', 'Nodejs', 'SQL Server', 'MongoDB', 'PostgreSQL', 'HTML', 'CSS'];
+const aptitudes = ['Self-learner','Proactive','Persistent','Respectful', 'Responsable', 'Extroverted', 'Languages (Spanish/English)', 'Problem Solutions' , 'Organization' , 'Analysis'];
 
 class App extends React.Component {
-
+  
   render() {
     return (
       <div className="App" >
@@ -23,15 +27,17 @@ class App extends React.Component {
           <br />
           <Container>
             <Row className="justify-content-md-center">
-              <Col lg="auto" md="auto" sm="auto" xl="auto" xs="auto"><Cards /></Col>
+              <Col><Cards header="My abilities..." title="Programming Languages" text={abilities.map(item => <li>{item}</li>)}/></Col>
+              <Col><Cards header="My values..." title="Aptitudes" text={aptitudes.map(item => <li>{item}</li>)}/></Col>
             </Row>
             <br/>
-            <Row className="justify-content-md-center">
-              <Col lg="auto" md="auto" sm="auto" xl="auto" xs="auto"><Cards /></Col>
-            </Row>
           </Container>
-
-
+          <div className="bg-dark">
+            <br/>
+            <MailForm/>
+            <br/>
+          </div>
+          <footer><p>hola hola</p></footer>
         </body>
       </div>
     );

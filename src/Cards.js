@@ -7,11 +7,11 @@ class Cards extends React.Component {
         return (
             <div className="cards">
                 <Card>
-                    <Card.Header>Featured</Card.Header>
+                    <Card.Header>{this.props.header}</Card.Header>
                     <Card.Body>
-                        <Card.Title>Special title treatment</Card.Title>
+                        <Card.Title>{this.props.title}</Card.Title>
                         <Card.Text>
-                            With supporting text below as a natural lead-in to additional content.
+                            {this.props.text}
                         </Card.Text>
                     </Card.Body>
                 </Card>
